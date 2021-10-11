@@ -1,0 +1,93 @@
+<br>
+<div class="container justify-content-center" *ngIf="!isAuth">
+  <h2 class="title">Вход: </h2>
+  <div class="mb-3">
+    <label for="Name" class="form-label">Имя</label>
+    <input type="email" class="form-control" [(ngModel)]="Name" id="name" placeholder="name">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Пароль</label>
+    <input type="email" class="form-control" [(ngModel)]="Password" id="password" placeholder="password">
+  </div>
+  <div class="mb-3">
+    <button class="btn btn-outline-secondary" (click)="auth()">Войти</button>
+  </div>
+</div>
+<section class="admin-panel container" *ngIf="isAuth">
+  <div>
+    <h1 class="title">Создание тура</h1>
+    <div class="mb-3">
+      <label for="title-card" class="form-label">Название</label>
+      <input type="email" [(ngModel)]="titleNewTour" class="form-control" id="title-card">
+    </div>
+    <div class="mb-3">
+      <label for="text-card" class="form-label">Краткое описание</label>
+      <textarea class="form-control" [(ngModel)]="textNewTour" id="text-card" rows="2"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="allText-card" class="form-label">Полное описание</label>
+      <textarea class="form-control" [(ngModel)]="allTextNewTour" id="allText-card" rows="4"></textarea>
+    </div>
+    <button class="btn btn-success" (click)="addNewTour()">Создать</button>
+  </div>
+  <br>
+  <div>
+    <h1 class="title">Новости</h1>
+    <div class="mb-3">
+      <label for="titleNews-card" class="form-label">Название</label>
+      <input type="email" [(ngModel)]="titleNewNews" class="form-control" id="titleNews-card">
+    </div>
+    <div class="mb-3">
+      <label for="textNews-card" class="form-label">Краткое описание</label>
+      <textarea class="form-control" [(ngModel)]="textNewNews" id="textNews-card" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="allTextNews-card" class="form-label">Полное описание</label>
+      <textarea class="form-control" [(ngModel)]="allTextNewNews" id="allTextNews-card" rows="4"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="calendar" class="form-label">Дата</label>
+      <form class="form-inline" id="calendar">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd"
+                   name="dp" [(ngModel)]="dateNewNews" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <button class="btn btn-success" (click)="addNewNews()">Создать</button>
+  </div>
+  <br>
+  <div class="tours">
+    <h1 class="title">Все туры</h1>
+    <div class="d-flex justify-content-center" *ngIf="loadingTours">
+      <div class="spinner-border text-warning" role="status">
+        <span class="visually-hidden"></span>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let tour of allTours; let index; " class="col">
+        <div class="card">
+          <img src="..." class="card-img-top" alt="Здесь должна быть фотография">
+          <div class="card-body">
+            <h4 class="card-title">{{tour.title}}</h4>
+            <p class="card-text">{{tour.text}}</p>
+            <button routerLink="/tour/{{tour.id}}" class="btn btn-primary">Подробности</button>
+            <button class="btn btn-danger" (click)="delTour(tour.id)">Удалить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="tours">
+    <h1 class="title">Все новости</h1>
+    <app-cards-news></app-cards-news>
+  </div>
+</section>
+<br>

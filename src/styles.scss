@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+@mixin small-display{
+  @media (max-width: 420px){
+    @content;
+  }
+}
+@mixin middle-display{
+  @media (max-width: 720px){
+    @content;
+  }
+}
+@mixin big-display{
+  @media (min-width: 1000px) {
+    @content;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

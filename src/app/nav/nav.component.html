@@ -1,0 +1,52 @@
+<nav class="navbar navbar-light">
+  <div class="nav mb-3 info-company-work">
+    <div class="col logo">
+      <h1>Название компании</h1>
+      <h2>Продажа туров</h2>
+    </div>
+    <div class="row align-items-center" *ngIf="!SmallScreen()">
+      <div class="col">
+        <h3>Адрес</h3>
+        Продажа туров
+      </div>
+      <div class="col" *ngIf="!MiddleScreen()">
+        <h3>Телефон</h3>
+        Продажа туров
+      </div>
+      <div class="col" *ngIf="!BigScreen()">
+        <h3>Часы работы</h3>
+        Продажа туров
+      </div>
+    </div>
+  </div>
+</nav>
+<nav class="nav shadow-sm justify-content-center bg-primary" id="sidebar">
+  <ul class="nav nav-tabs">
+    <li class="d-inline-block">
+      <a class="nav-link" routerLink="/">Главная</a>
+    </li>
+    <li class="d-inline-block">
+      <a class="nav-link" routerLink="/about-us">О нас</a>
+    </li>
+    <li class="d-inline-block" ngbDropdown>
+      <a class="nav-link" ngbDropdownToggle>
+        Туры
+      </a>
+      <ul ngbDropdownMenu aria-labelledby="Tours">
+        <li *ngFor="let tour of tours"><a ngbDropdownItem routerLink="tour/{{tour.id}}">{{tour.title}}</a></li>
+      </ul>
+    </li>
+    <li class="d-inline-block">
+      <a class="nav-link" routerLink="/news">Новости</a>
+    </li>
+    <li class="d-inline-block">
+      <a class="nav-link" routerLink="/contacts">Контакты</a>
+    </li>
+  </ul>
+  <form class="d-flex">
+    <input class="form-control mr-1" type="search" placeholder="Поиск туров" aria-label="Поиск">
+    <button class="btn btn-warning" type="submit">Поиск</button>
+  </form>
+</nav>
+
+

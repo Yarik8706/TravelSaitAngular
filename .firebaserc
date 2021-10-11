@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "tours-e1d96": {
+      "hosting": {
+        "tours": [
+          "tours-e1d96"
+        ]
+      }
+    }
+  }
+}

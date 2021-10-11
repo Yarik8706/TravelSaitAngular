@@ -1,0 +1,32 @@
+@import "../../styles";
+.news{
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 30px;
+  overflow: hidden;
+  justify-content: center;
+  .news-title{
+    font-weight: 700;
+    font-size: 22px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+  .title{
+    font-weight: 700;
+  }
+  .data{
+    color: grey;
+    font-size: 12px;
+  }
+  .text{
+    font-size: 18px;
+  }
+}
+@include small-display{
+  .news{
+    .text{
+      font-size: 14px;
+    }
+  }
+}

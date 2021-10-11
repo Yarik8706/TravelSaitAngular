@@ -1,0 +1,36 @@
+@import "../../styles";
+.about-us{
+  .text {
+    .title{
+      font-size: 32px;
+      padding-left: 40px;
+      font-weight: 700;
+    }
+    h3{
+      font-size: 28px;
+      padding-left: 40px;
+      font-weight: 600;
+    }
+    p{
+      line-height: 45px;
+    }
+  }
+}
+@include big-display{
+  .about-us{
+    .text{
+      p{
+        font-size: 20px;
+      }
+    }
+  }
+}
+@include small-display{
+  .about-us{
+    .text{
+      .title, h3, p{
+        padding-left: 10px;
+      }
+    }
+  }
+}

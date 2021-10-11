@@ -1,0 +1,31 @@
+@import "../../styles";
+.tour{
+  .title{
+    font-size: 32px;
+    padding-left: 40px;
+    font-weight: 700;
+  }
+  h3{
+    font-size: 28px;
+    padding-left: 40px;
+    font-weight: 600;
+  }
+  p{
+    font-size: 20px;
+    line-height: 45px;
+  }
+}
+@include big-display{
+  .about-us{
+    p{
+      font-size: 20px;
+    }
+  }
+}
+@include small-display{
+  .about-us{
+    .title, h3, p{
+      padding-left: 10px;
+    }
+  }
+}

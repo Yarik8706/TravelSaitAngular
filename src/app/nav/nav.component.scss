@@ -1,0 +1,30 @@
+@import "../../styles";
+.info-company-work{
+  width: 100%;
+  .logo{
+    font-weight: 700;
+    transform: translateY(12.5%);
+  }
+}
+@include small-display{
+  .info-company-work{
+    .logo{
+      h1{
+        font-size: xx-large;
+      }
+      h2{
+        font-size: x-large;
+      }
+    }
+  }
+}
+#sidebar{
+  ul{
+    ul{
+      background-color: $info;
+    }
+    a{
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<div class="news">
+  <div class="d-flex justify-content-center" *ngIf="loadingNews">
+    <div class="spinner-border text-warning" role="status">
+      <span class="visually-hidden"></span>
+    </div>
+  </div>
+  <div *ngFor="let new of allNews" [class.row]="!SmallScreen()">
+    <div class="col-ml">
+      <img src="" alt="Здесь должно быть фото">
+    </div>
+    <div class="col">
+      <h5 class="title">{{new.title}}</h5>
+      <span class="data">{{new.time}}</span>
+      <p class="text">
+        {{new.text}}
+      </p>
+      <span *ngIf="isAdmin()">
+        <div class="row">
+          <button class="btn btn-outline-danger" (click)="delNews(new.id)">Удалить</button>
+          <button class="btn btn-outline-warning">Изменить(неработает)</button>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

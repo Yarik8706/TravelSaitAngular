@@ -1,0 +1,22 @@
+@import "../../styles";
+.slider2{
+  background: url("https://bayguzin.ru/demo2019/trabble/images/bgimage/countbg.jpg") left 50% top 50%;
+  background-size: cover;
+  height:250px;
+  .row{
+    margin-left: 50px;
+    transform: translateY(50%);
+  }
+  h1{
+    font-weight: 600;
+    color: white;
+    font-size: 45px;
+  }
+}
+@include small-display{
+  .slider2{
+    h1{
+      font-size: 43px;
+    }
+  }
+}

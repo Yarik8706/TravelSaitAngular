@@ -1,0 +1,15 @@
+@import "../../styles";
+.card{
+  .title{
+    text-align: center;
+    font-weight: 700;
+
+  }
+}
+@include small-display{
+  .card{
+    .title{
+      font-size: 20px;
+    }
+  }
+ }

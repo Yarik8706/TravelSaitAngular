@@ -1,0 +1,76 @@
+<section class="slider1">
+  <div class="row align-items-center">
+    <div class="col">
+      <h1>Продажа туров</h1>
+      <p>Описание акции или другая дополнительная информация</p>
+      <button class="btn btn-info">Подробнее</button>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+<section class="container">
+  <div class="justify-content-center">
+    <h1 style="text-align: center">Горячие туры</h1>
+    <br>
+    <div [class.row]="!SmallScreen()">
+      <div class="col">
+        <div class="card">
+          <img src="..." class="card-img-top" alt="Здесь должна быть фотография">
+          <div class="card-body">
+            <h4 class="card-title">Заголовок карточки</h4>
+            <p class="card-text">Небольшой пример текста, который должен основываться на названии карточки и составлять основную часть содержимого карты.</p>
+            <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="..." class="card-img-top" alt="Здесь должна быть фотография">
+          <div class="card-body">
+            <h4 class="card-title">Заголовок карточки</h4>
+            <p class="card-text">Небольшой пример текста, который должен основываться на названии карточки и составлять основную часть содержимого карты.</p>
+            <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <h1 style="text-align: center">Туры</h1>
+  <br>
+  <div class="d-flex justify-content-center" *ngIf="loadingTours">
+    <div class="spinner-border text-warning" role="status">
+      <span class="visually-hidden"></span>
+    </div>
+  </div>
+  <div class="" id="tours">
+<!--    <div >-->
+      <div *ngFor="let tour of allTours; let index; " class="card" >
+        <img src="..." class="card-img-top" alt="Здесь должна быть фотография">
+        <div class="card-body">
+          <h4 class="card-title">{{tour.title}}</h4>
+          <p class="card-text">{{tour.text}}</p>
+          <a routerLink="tour/{{tour.id}}" class="btn btn-primary">Подробности</a>
+<!--          <button class="btn btn-danger" data-id="{{tour.id}}" (click)="delTour(this)">Удалить</button>-->
+        </div>
+      </div>
+<!--    </div>-->
+  </div>
+</section>
+<br>
+<section class="container">
+  <div class="stock-border row">
+    <div class="col">
+      <h1>Торопитесь, скидка 20% до конца месяца!</h1>
+      <p>
+        Скидка — сумма, на которую снижается продажная цена товара, реализуемого покупателю.
+        Исторически скидки появились и стали использоваться в условиях уличной торговли товарами,
+        когда продавец в результате торга предоставлял скидку тому покупателю, который приобретает больше товаров.
+      </p>
+    </div>
+    <div class="col-ml">
+      <button class="btn btn-info">Подробнее</button>
+    </div>
+  </div>
+</section>

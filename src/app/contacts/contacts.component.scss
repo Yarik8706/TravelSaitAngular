@@ -1,0 +1,31 @@
+@import "../../styles";
+.contacts{
+  justify-content: center;
+  ////text-align: center;
+  //display: inline-block;
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 30px;
+  overflow: hidden;
+  ////position: relative;
+  //left: 50%;
+  //transform: translateY(-50%);
+  z-index: 2;
+  h6{
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .info{
+    font-size: 18px;
+
+  }
+}
+@include small-display{
+  .contacts{
+    .info{
+      font-size: 14px;
+    }
+  }
+}

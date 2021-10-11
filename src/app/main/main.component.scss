@@ -1,0 +1,49 @@
+@import "../../styles";
+.slider1{
+  background: url("https://bayguzin.ru/demo2019/trabble/images/bgimage/countbg.jpg") left 50% top 50%;
+  width: 100% !important;
+  height:550px;
+  .row{
+    margin-left: 50px;
+    padding-top: 200px;
+  }
+  p, h1{
+    font-weight: 600;
+    color: white;
+  }
+  p {
+    font-size: 25px;
+  }
+  h1{
+    font-size: 45px;
+  }
+}
+.stock-border {
+  display: inline-block;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 30px;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+@include big-display{
+  .card{
+    width: 300px;
+    display: block;
+    .card-body {
+      p, a{
+        font-size: 18px;
+      }
+      h4{
+        font-size: 24px;
+      }
+    }
+  }
+}
+@include small-display{
+  .card{
+    width: 100%!important;
+  }
+}

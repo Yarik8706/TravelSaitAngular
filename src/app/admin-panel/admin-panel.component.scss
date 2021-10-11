@@ -1,0 +1,23 @@
+@import "../../styles";
+.tours{
+  .title{
+    text-align: center;
+  }
+}
+@include big-display{
+  .card{
+    .card-body {
+      p, a{
+        font-size: 18px;
+      }
+      h4{
+        font-size: 24px;
+      }
+    }
+  }
+}
+@include small-display{
+  .card{
+    width: 100%!important;
+  }
+}
