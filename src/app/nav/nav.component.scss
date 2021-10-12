@@ -5,6 +5,9 @@
     font-weight: 700;
     transform: translateY(12.5%);
   }
+  .edit-input{
+    width: 200px;
+  }
 }
 @include small-display{
   .info-company-work{

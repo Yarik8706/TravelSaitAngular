@@ -28,22 +28,9 @@
   position: relative;
   z-index: 2;
 }
-@include big-display{
-  .card{
-    width: 300px;
-    display: block;
-    .card-body {
-      p, a{
-        font-size: 18px;
-      }
-      h4{
-        font-size: 24px;
-      }
-    }
-  }
-}
-@include small-display{
-  .card{
-    width: 100%!important;
+
+.carousel-tours{
+  img{
+    width: 100%;
   }
 }

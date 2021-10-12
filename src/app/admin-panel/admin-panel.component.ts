@@ -21,10 +21,6 @@ export class AdminPanelComponent extends UnitComponent {
   fromDate: NgbDate;
   toDate: NgbDate;
   newTour: {};
-  // @ts-ignore
-  allTours: [Tour] = [];
-  loadingTours: boolean;
-
 
   //--------------News-----------------
   titleNewNews: string;
@@ -51,24 +47,7 @@ export class AdminPanelComponent extends UnitComponent {
 
   ngOnInit() {
     this.isAuth = localStorage.getItem('access') == 'true';
-    this.loadingTours = true;
-    this.tourService.getAllTour().subscribe(data => {
-      let dataTour: {};
-      data.forEach(tour => {
-        dataTour = tour.data();
-        //@ts-ignore
-        dataTour['toDate'] = Object.values(dataTour.toDate).join("-");
-        // @ts-ignore
-        dataTour['fromDate'] = Object.values(dataTour.fromDate).join("-");
-        dataTour['id'] = tour.id;
-        // @ts-ignore
-        this.allTours.push(dataTour);
-      });
-      this.loadingTours = false;
-    });
   }
-
-
 
   auth(){
     this.store.collection<User>('users').doc(this.Name).get().subscribe(data => {
@@ -115,11 +94,6 @@ export class AdminPanelComponent extends UnitComponent {
     };
     await this.store.collection('tours').doc(this.randomGenerateId(8)).set(this.newTour);
     location.reload()
-  }
-
-  delTour(id){
-    this.store.collection('tours').doc(id).delete();
-    location.reload();
   }
 
   randomGenerateId(long): string{

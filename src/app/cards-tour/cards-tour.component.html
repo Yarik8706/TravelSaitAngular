@@ -1,1 +1,19 @@
-<p>cards-tour works!</p>
+<div class="d-flex justify-content-center" *ngIf="loadingTours">
+  <div class="spinner-border text-warning" role="status">
+    <span class="visually-hidden"></span>
+  </div>
+</div>
+<div class="row">
+  <div *ngFor="let tour of allTours; let index; " class="col">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="Здесь должна быть фотография">
+      <div class="card-body">
+        <h4 class="card-title">{{tour.title}}</h4>
+        <p class="card-text">{{tour.text}}</p>
+        <span>From: {{tour.fromDate}}, To: {{tour.toDate}}</span><br>
+        <button routerLink="/tour/{{tour.id}}" class="btn btn-primary">Подробности</button>
+        <button class="btn btn-danger" (click)="delTour(tour.id)">Удалить</button>
+      </div>
+    </div>
+  </div>
+</div>

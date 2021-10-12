@@ -9,9 +9,7 @@ import {Tour} from "../interfaces/tour";
 })
 export class MainComponent extends UnitComponent {
 
-  // @ts-ignore
-  allTours: [Tour] = [];
-  loadingTours: boolean;
+  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
   constructor(
     injector: Injector
@@ -20,17 +18,5 @@ export class MainComponent extends UnitComponent {
   }
 
   ngOnInit(): void {
-    this.loadingTours = true;
-    this.store.collection<Tour>('tours').get().subscribe(data => {
-      let dataTour: {};
-      data.forEach(tour => {
-        dataTour = tour.data();
-        dataTour['id'] = tour.id;
-        // @ts-ignore
-        this.allTours.push(dataTour);
-      });
-      this.loadingTours = false;
-    });
   }
-
 }

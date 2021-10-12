@@ -29,6 +29,10 @@
       <textarea class="form-control" [(ngModel)]="allTextNewTour" id="allText-card" rows="4"></textarea>
     </div>
     <div class="mb-3">
+      <input type="file" id="upload">
+      <button class="btn btn-warning">Загрузить фотографию</button>
+    </div>
+    <div class="mb-3">
       <label for="dateTour" class="form-label">Тур действует от и до:</label>
       <form class="form-inline" id="dateTour">
         <div class="form-group hidden">
@@ -123,20 +127,7 @@
         <span class="visually-hidden"></span>
       </div>
     </div>
-    <div class="row">
-      <div *ngFor="let tour of allTours; let index; " class="col">
-        <div class="card">
-          <img src="..." class="card-img-top" alt="Здесь должна быть фотография">
-          <div class="card-body">
-            <h4 class="card-title">{{tour.title}}</h4>
-            <p class="card-text">{{tour.text}}</p>
-            <span>From: {{tour.fromDate}}, To: {{tour.toDate}}</span><br>
-            <button routerLink="/tour/{{tour.id}}" class="btn btn-primary">Подробности</button>
-            <button class="btn btn-danger" (click)="delTour(tour.id)">Удалить</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-cards-tour></app-cards-tour>
   </div>
   <br>
   <div class="tours">

@@ -21,6 +21,21 @@ export class CardsTourComponent extends UnitComponent{
   }
 
   ngOnInit(): void {
+    this.loadingTours = true;
+    this.tourService.getAllTour().subscribe(data => {
+      let dataTour: {};
+      data.forEach(tour => {
+        dataTour = tour.data();
+        //@ts-ignore
+        dataTour['toDate'] = Object.values(dataTour.toDate).join("-");
+        // @ts-ignore
+        dataTour['fromDate'] = Object.values(dataTour.fromDate).join("-");
+        dataTour['id'] = tour.id;
+        // @ts-ignore
+        this.allTours.push(dataTour);
+      });
+      this.loadingTours = false;
+    });
   }
 
   delTour(id){

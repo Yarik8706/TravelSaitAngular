@@ -1,21 +1,33 @@
 <nav class="navbar navbar-light">
   <div class="nav mb-3 info-company-work">
+    <a class="navbar-brand" href="#">
+      <img src="../../assets/logo.PNG" alt="" width="100" height="100" class="d-inline-block align-text-top">
+    </a>
     <div class="col logo">
-      <h1>Название компании</h1>
-      <h2>Продажа туров</h2>
+      <div class="row">
+        <input class="form-control mr-1 edit-input" *ngIf="isEdit" [(ngModel)]="companyName" placeholder="Название компании">
+        <h1 *ngIf="!isEdit">{{companyName}}</h1>
+        <button class="btn btn-outline-danger" (click)="EditNavInfo(); isEdit = !isEdit" *ngIf="isAdmin()">Изменить</button>
+      </div>
+      <div class="row">
+        <h2>Продажа туров</h2>
+      </div>
     </div>
-    <div class="row align-items-center" *ngIf="!SmallScreen()">
-      <div class="col">
-        <h3>Адрес</h3>
-        Продажа туров
+    <div class="row align-items-center" style="margin-right: 30px" *ngIf="!SmallScreen()">
+      <div class="col-ml px-5">
+        <h3><bi name="geo-alt-fill"></bi>Адрес</h3>
+        <input class="form-control mr-1 edit-input" *ngIf="isEdit" [(ngModel)]="address" placeholder="Адрес">
+        <span *ngIf="!isEdit">{{address}}</span>
       </div>
-      <div class="col" *ngIf="!MiddleScreen()">
-        <h3>Телефон</h3>
-        Продажа туров
+      <div class="col-ml px-5" *ngIf="!MiddleScreen()">
+        <h3><bi name="telephone"></bi>Телефон</h3>
+        <input class="form-control mr-1 edit-input" *ngIf="isEdit" [(ngModel)]="telephone" placeholder="Телефон">
+        <span *ngIf="!isEdit">{{telephone}}</span>
       </div>
-      <div class="col" *ngIf="!BigScreen()">
-        <h3>Часы работы</h3>
-        Продажа туров
+      <div class="col-ml px-5" *ngIf="!BigScreen()">
+        <h3><bi name="alarm"></bi>Часы работы</h3>
+        <input class="form-control mr-1 edit-input" *ngIf="isEdit" [(ngModel)]="timeWork" placeholder="Часы работы">
+        <span *ngIf="!isEdit" class="justify-content-center">{{timeWork}}</span>
       </div>
     </div>
   </div>

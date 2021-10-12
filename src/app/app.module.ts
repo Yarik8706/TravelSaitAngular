@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from "@angular/router";
 import { FormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BootstrapIconsModule } from 'ng-bootstrap-icons';
+import { allIcons } from 'ng-bootstrap-icons/icons';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -48,6 +50,7 @@ const appRoutes: Routes = [
   { path: '**', redirectTo: '' }
 ];
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,6 +71,7 @@ const appRoutes: Routes = [
     CardsTourComponent
   ],
   imports: [
+    BootstrapIconsModule.pick(allIcons),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     RouterModule.forRoot(appRoutes),
