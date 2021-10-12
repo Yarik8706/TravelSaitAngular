@@ -29,6 +29,7 @@ import {NewsService} from "./services/news.service";
 import { CardTourComponent } from './card-tour/card-tour.component';
 import { CardsNewsComponent } from './cards-news/cards-news.component';
 import { CardNewsComponent } from './card-news/card-news.component';
+import { CardsTourComponent } from './cards-tour/cards-tour.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainComponent},
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     TourComponent,
     CardTourComponent,
     CardsNewsComponent,
-    CardNewsComponent
+    CardNewsComponent,
+    CardsTourComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

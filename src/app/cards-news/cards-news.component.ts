@@ -11,12 +11,8 @@ import {Tour} from "../interfaces/tour";
   styleUrls: ['./cards-news.component.scss']
 })
 export class CardsNewsComponent extends UnitComponent{
+
   //--------------News-----------------
-  titleNewNews: string;
-  textNewNews: string;
-  dateNewNews: NgbDateStruct;
-  allTextNewNews: string;
-  newNews: {};
   // @ts-ignore
   allNews: [News] = [];
   loadingNews: boolean;
@@ -43,49 +39,13 @@ export class CardsNewsComponent extends UnitComponent{
         // @ts-ignore
         this.allNews.push(dataTour);
       });
+      this.loadingNews = false;
     });
-    this.loadingNews = false;
   };
-
-  addNewNews() {
-    this.newNews = {
-      title: this.titleNewNews,
-      text: this.textNewNews,
-      allText: this.allTextNewNews,
-      time: this.dateNewNews
-    };
-    this.store.collection('news').doc(this.randomGenerateId(8)).set(this.newNews);
-    this.CreateFlashMessage("Новоя новость успешно создан!", "success", 4000);
-    this.titleNewNews = "";
-    this.textNewNews = "";
-    this.allTextNewNews = "";
-    this.dateNewNews = null;
-  }
 
   delNews(id){
     this.CreateFlashMessage("Новоя новость успешно удалена!", "success", 4000);
     this.newsService.delNews(id);
     location.reload()
-  }
-
-  randomGenerateId(long): string{
-    long = long ?? 8;
-    let id: string;
-    while (true){
-      id = String(this.generateNumber(long));
-      const tour: any = this.store.collection<Tour>('tour').doc(id).get();
-      if(!tour.exists){
-        return id;
-      }
-    }
-  }
-
-  generateNumber(long: number): number{
-    let max: any = '';
-    for(long; long > 0; long--){
-      max = max + '9'
-    }
-    max = Number(max);
-    return Math.floor(Math.random() * max);
   }
 }

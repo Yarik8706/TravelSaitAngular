@@ -1,34 +1,5 @@
 <br>
-<section class="container news">
-  <h6 class="news-title">Новости</h6>
-  <div class="row">
-    <div [class.row]="!SmallScreen()">
-      <div class="col-ml">
-        <img style="width: 160px; height: 130px" src="../../assets/2021-09-30_18.10.59.png" alt="Здесь должно быть фото">
-      </div>
-      <div class="col">
-        <h5 class="title">Внимание скидки!</h5>
-        <span class="data">04.10.2021</span>
-        <p class="text">
-          Рыба в веб-дизайне — временное наполнение макета страницы для имитации её законченного вида.
-          У дизайнера не всегда есть под рукой материалы,
-          которые планируется публиковать на веб-сайте и поэтому нужн [...]
-        </p>
-      </div>
-    </div>
-    <div [class.row]="!SmallScreen()">
-      <div class="col-ml">
-        <img src="" alt="Здесь должно быть фото">
-      </div>
-      <div class="col">
-        <h5 class="title">Внимание скидки!</h5>
-        <span class="data">04.10.2021</span>
-        <p class="text">
-          Рыба в веб-дизайне — временное наполнение макета страницы для имитации её законченного вида.
-          У дизайнера не всегда есть под рукой материалы,
-          которые планируется публиковать на веб-сайте и поэтому нужн [...]
-        </p>
-      </div>
-    </div>
-  </div>
+<section class="container app-news">
+  <h6 class="title">Новости</h6>
+  <app-cards-news></app-cards-news>
 </section>
