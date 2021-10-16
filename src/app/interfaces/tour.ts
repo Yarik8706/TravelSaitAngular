@@ -4,5 +4,6 @@ export interface Tour {
   title: string,
   fromDate,
   toDate,
-  id: string,
+  hot?: boolean,
+  id?
 }

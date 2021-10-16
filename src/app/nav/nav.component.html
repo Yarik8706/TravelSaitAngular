@@ -32,7 +32,7 @@
     </div>
   </div>
 </nav>
-<nav class="nav shadow-sm justify-content-center bg-primary" id="sidebar">
+<nav class="nav shadow-sm justify-content-center bg-warning" id="sidebar">
   <ul class="nav nav-tabs">
     <li class="d-inline-block">
       <a class="nav-link" routerLink="/">Главная</a>
@@ -54,10 +54,13 @@
     <li class="d-inline-block">
       <a class="nav-link" routerLink="/contacts">Контакты</a>
     </li>
+    <li class="d-inline-block" *ngIf="isAdmin()">
+      <a class="nav-link" routerLink="/admin-panel">Панель админа</a>
+    </li>
   </ul>
   <form class="d-flex">
     <input class="form-control mr-1" type="search" placeholder="Поиск туров" aria-label="Поиск">
-    <button class="btn btn-warning" type="submit">Поиск</button>
+    <button class="btn btn-danger" type="submit">Поиск</button>
   </form>
 </nav>
 

@@ -1,0 +1,12 @@
+<div class="stock-border row" *ngFor="let discount of allDiscounts">
+  <div class="col">
+    <h1>{{discount.title}}</h1>
+    <span class="text-muted">{{discount.time}}</span>
+    <p>
+      {{discount.text}}
+    </p>
+  </div>
+  <div class="col-ml">
+    <button class="btn btn-warning">Подробнее</button>
+  </div>
+</div>

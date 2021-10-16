@@ -4,6 +4,23 @@
     text-align: center;
   }
 }
+#uploadFileInput{
+  visibility: hidden;
+}
+
+.preview{
+  display: flex;
+  flex-wrap: wrap;
+  padding: .8rem;
+}
+.preview-image{
+  margin-bottom: .5rem;
+  margin-right: .5rem;
+  img{
+    width: 180px;
+    height: auto;
+  }
+}
 .form-group.hidden {
   width: 0;
   margin: 0;

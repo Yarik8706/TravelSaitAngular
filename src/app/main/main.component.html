@@ -1,66 +1,20 @@
-<section class="slider1">
-  <div class="row align-items-center">
-    <div class="col">
-      <h1>Продажа туров</h1>
-      <p>Описание акции или другая дополнительная информация</p>
-      <button class="btn btn-info">Подробнее</button>
+<section class="main">
+  <section class="slider1">
+    <div class="row align-items-center">
+      <div class="col">
+        <h1>Продажа туров</h1>
+        <p>Описание акции или другая дополнительная информация</p>
+        <button class="btn btn-warning" routerLink="/about-us">Подробнее</button>
+      </div>
     </div>
-  </div>
-</section>
-<br>
-<br>
-<section class="container">
-  <div class="justify-content-center">
-    <h1 style="text-align: center">Горячие туры</h1>
-    <br>
-    <ngb-carousel *ngIf="images" class="carousel-tours">
-      <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
-          <img [src]="images[0]" alt="Random first slide">
-        </div>
-        <div class="carousel-caption">
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
-          <img [src]="images[1]" alt="Random second slide">
-        </div>
-        <div class="carousel-caption">
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
-          <img [src]="images[2]" alt="Random third slide">
-        </div>
-        <div class="carousel-caption">
-          <h3>Third slide label</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-        </div>
-      </ng-template>
-    </ngb-carousel>
-  </div>
-  <div class="all-tours" style="padding-top: 20px">
-    <h1 style="text-align: center">Туры</h1>
-    <app-cards-tour style="padding-top: 20px"></app-cards-tour>
-  </div>
-</section>
-<br>
-<section class="container">
-  <div class="stock-border row">
-    <div class="col">
-      <h1>Торопитесь, скидка 20% до конца месяца!</h1>
-      <p>
-        Скидка — сумма, на которую снижается продажная цена товара, реализуемого покупателю.
-        Исторически скидки появились и стали использоваться в условиях уличной торговли товарами,
-        когда продавец в результате торга предоставлял скидку тому покупателю, который приобретает больше товаров.
-      </p>
-    </div>
-    <div class="col-ml">
-      <button class="btn btn-info">Подробнее</button>
-    </div>
-  </div>
+  </section>
+  <br>
+  <br>
+  <section class="container">
+    <app-cards-tour></app-cards-tour>
+  </section>
+  <br>
+  <section class="container">
+    <app-cards-discount></app-cards-discount>
+  </section>
 </section>

@@ -32,6 +32,7 @@ import { CardTourComponent } from './card-tour/card-tour.component';
 import { CardsNewsComponent } from './cards-news/cards-news.component';
 import { CardNewsComponent } from './card-news/card-news.component';
 import { CardsTourComponent } from './cards-tour/cards-tour.component';
+import { CardsDiscountComponent } from './cards-discount/cards-discount.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainComponent},
@@ -68,7 +69,8 @@ const appRoutes: Routes = [
     CardTourComponent,
     CardsNewsComponent,
     CardNewsComponent,
-    CardsTourComponent
+    CardsTourComponent,
+    CardsDiscountComponent
   ],
   imports: [
     BootstrapIconsModule.pick(allIcons),

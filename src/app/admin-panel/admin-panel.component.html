@@ -29,8 +29,13 @@
       <textarea class="form-control" [(ngModel)]="allTextNewTour" id="allText-card" rows="4"></textarea>
     </div>
     <div class="mb-3">
-      <input type="file" id="upload">
-      <button class="btn btn-warning">Загрузить фотографию</button>
+      <button class="btn btn-warning" (click)="triggerInput()">Загрузить фотографию</button>
+      <input [type]="'file'" [multiple]="true" id="uploadFileInput" [accept]="'.png,.jpeg,.jpg'">
+      <div class="preview">
+        <div class="preview-image" *ngFor="let img of uploadFileSRC">
+          <img src="{{img}}">
+        </div>
+      </div>
     </div>
     <div class="mb-3">
       <label for="dateTour" class="form-label">Тур действует от и до:</label>
@@ -120,13 +125,39 @@
     <button class="btn btn-success" (click)="addNewNews()">Создать</button>
   </div>
   <br>
+  <div>
+    <h1 class="title">Создание скидки</h1>
+    <div class="mb-3">
+      <label for="titleDiscount-card" class="form-label">Название</label>
+      <input type="email" [(ngModel)]="titleNewDiscount" class="form-control" id="titleDiscount-card">
+    </div>
+    <div class="mb-3">
+      <label for="textDiscount-card" class="form-label">Краткое описание</label>
+      <textarea class="form-control" [(ngModel)]="textNewDiscount" id="textDiscount-card" rows="2"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="allTextDiscount-card" class="form-label">Полное описание</label>
+      <textarea class="form-control" [(ngModel)]="allTextNewDiscount" id="allTextDiscount-card" rows="4"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="calendarDiscount" class="form-label">Дата</label>
+      <form class="form-inline" id="calendarDiscount">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd"
+                   name="dp" [(ngModel)]="dateNewDiscount" ngbDatepicker #de="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="de.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <button class="btn btn-success" (click)="addNewDiscount()">Создать</button>
+  </div>
+  <br>
   <div class="tours">
     <h1 class="title">Все туры</h1>
-    <div class="d-flex justify-content-center" *ngIf="loadingTours">
-      <div class="spinner-border text-warning" role="status">
-        <span class="visually-hidden"></span>
-      </div>
-    </div>
     <app-cards-tour></app-cards-tour>
   </div>
   <br>

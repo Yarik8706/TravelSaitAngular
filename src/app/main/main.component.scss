@@ -1,4 +1,10 @@
 @import "../../styles";
+
+.main{
+  background-image: url("http://online.premiumbank.az/assets/images/clouds.png");
+}
+
+
 .slider1{
   background: url("https://bayguzin.ru/demo2019/trabble/images/bgimage/countbg.jpg") left 50% top 50%;
   width: 100% !important;
@@ -18,19 +24,5 @@
     font-size: 45px;
   }
 }
-.stock-border {
-  display: inline-block;
-  margin: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  padding: 30px;
-  overflow: hidden;
-  position: relative;
-  z-index: 2;
-}
 
-.carousel-tours{
-  img{
-    width: 100%;
-  }
-}
+
