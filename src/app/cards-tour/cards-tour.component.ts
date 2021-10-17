@@ -13,6 +13,12 @@ export class CardsTourComponent extends UnitComponent{
   // @ts-ignore
   allTours: [Tour] = [];
   // @ts-ignore
+  allTours1: [Tour] = [];
+  // @ts-ignore
+  allTours2: [Tour] = [];
+  // @ts-ignore
+  allTours3: [Tour] = [];
+  // @ts-ignore
   hotTours: {Tour} = [];
   loadingTours: boolean;
 

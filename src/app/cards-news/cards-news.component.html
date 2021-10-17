@@ -6,7 +6,7 @@
   </div>
   <div *ngFor="let new of allNews" [class.row]="!SmallScreen()">
     <div class="col-ml">
-      <img src="" alt="Здесь должно быть фото">
+      <img src="{{new.img.src}}" alt="{{new.img.name}}">
     </div>
     <div class="col">
       <h5 class="title">{{new.title}}</h5>
@@ -16,6 +16,7 @@
       </p>
       <span *ngIf="isAdmin()">
         <div class="row">
+          <a class="btn btn-outline-success" href="news/{{new.id}}">Подробнее</a>
           <button class="btn btn-outline-danger" (click)="delNews(new.id)">Удалить</button>
           <button class="btn btn-outline-warning">Изменить(неработает)</button>
         </div>

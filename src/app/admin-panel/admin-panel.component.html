@@ -29,11 +29,20 @@
       <textarea class="form-control" [(ngModel)]="allTextNewTour" id="allText-card" rows="4"></textarea>
     </div>
     <div class="mb-3">
-      <button class="btn btn-warning" (click)="triggerInput()">Загрузить фотографию</button>
-      <input [type]="'file'" [multiple]="true" id="uploadFileInput" [accept]="'.png,.jpeg,.jpg'">
-      <div class="preview">
+      <input class="checkbox" type="checkbox" value="" (click)="isHotTour = !isHotTour" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">Это горячий тур?</label>
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-warning" (click)="inputTours.click()">Загрузить фотографию</button>
+      <input [type]="'file'" #inputTours (change)="uploadEvent($event)" [multiple]="true" class="uploadFileInput" [accept]="'.png,.jpeg,.jpg'">
+      <div class="preview" id="preview" >
         <div class="preview-image" *ngFor="let img of uploadFileSRC">
-          <img src="{{img}}">
+          <div class="preview-remove" (click)="removeEvent(img.name)">&times;</div>
+          <img src="{{img.src}}" alt="{{img.name}}">
+          <div class="preview-info">
+            <span>{{img.name}}</span>
+            {{img.size}}
+          </div>
         </div>
       </div>
     </div>
@@ -42,24 +51,11 @@
       <form class="form-inline" id="dateTour">
         <div class="form-group hidden">
         <div class="input-group">
-          <input name="datepicker"
-                 class="form-control"
-                 ngbDatepicker
-                 #datepicker="ngbDatepicker"
-                 [autoClose]="'outside'"
-                 (dateSelect)="onDateSelection($event)"
-                 [displayMonths]="2"
-                 [dayTemplate]="t"
-                 outsideDays="hidden"
-                 [startDate]="fromDate!"
-                 tabindex="-1">
+          <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker" [autoClose]="'outside'"
+                 (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
           <ng-template #t let-date let-focused="focused">
-        <span class="custom-day"
-              [class.focused]="focused"
-              [class.range]="isRange(date)"
-              [class.faded]="isHovered(date) || isInside(date)"
-              (mouseenter)="hoveredDate = date"
-              (mouseleave)="hoveredDate = null">
+        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
+              (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
           {{ date.day }}
         </span>
           </ng-template>
@@ -67,10 +63,7 @@
       </div>
         <div class="form-group">
         <div class="input-group">
-          <input #dpFromDate
-                 class="form-control" placeholder="yyyy-mm-dd"
-                 name="dpFromDate"
-                 [value]="formatter.format(fromDate)"
+          <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate" [value]="formatter.format(fromDate)"
                  (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
@@ -79,10 +72,7 @@
       </div>
         <div class="form-group ml-2">
         <div class="input-group">
-          <input #dpToDate
-                 class="form-control" placeholder="yyyy-mm-dd"
-                 name="dpToDate"
-                 [value]="formatter.format(toDate)"
+          <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate" [value]="formatter.format(toDate)"
                  (input)="toDate = validateInput(toDate, dpToDate.value)">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
@@ -107,6 +97,20 @@
     <div class="mb-3">
       <label for="allTextNews-card" class="form-label">Полное описание</label>
       <textarea class="form-control" [(ngModel)]="allTextNewNews" id="allTextNews-card" rows="4"></textarea>
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-warning" (click)="inputNews.click()">Загрузить фотографию</button>
+      <input [type]="'file'" #inputNews (change)="uploadEvent($event, true)" class="uploadFileInput" [accept]="'.png,.jpeg,.jpg'">
+      <div class="preview">
+        <div class="preview-image" *ngFor="let img of uploadFileSRCNews">
+          <div class="preview-remove" (click)="removeEvent(img.name, true)">&times;</div>
+          <img src="{{img.src}}" alt="{{img.name}}">
+          <div class="preview-info">
+            <span>{{img.name}}</span>
+            {{img.size}}
+          </div>
+        </div>
+      </div>
     </div>
     <div class="mb-3">
       <label for="calendar" class="form-label">Дата</label>

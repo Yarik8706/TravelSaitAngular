@@ -19,7 +19,8 @@ export class AdminPanelComponent extends UnitComponent {
   allTextNewTour: string;
   hoveredDate: NgbDate = null;
   uploadFileInput: HTMLElement;
-  uploadFileSRC: [];
+  // @ts-ignore
+  uploadFileSRC: [{}] = [];
   fromDate: NgbDate;
   toDate: NgbDate;
   newTour: {};
@@ -31,6 +32,8 @@ export class AdminPanelComponent extends UnitComponent {
   dateNewNews: NgbDateStruct;
   allTextNewNews: string;
   newNews: {};
+  // @ts-ignore
+  uploadFileSRCNews: [{}] = [];
 
   //--------------Discount-------------
   titleNewDiscount: string;
@@ -55,10 +58,11 @@ export class AdminPanelComponent extends UnitComponent {
   }
 
   ngOnInit() {
+    this.isHotTour = false;
     this.isAuth = localStorage.getItem('access') == 'true';
     setTimeout(()=>{
       this.uploadFileInput = document.getElementById("uploadFileInput");
-      this.uploadFileInput.addEventListener('change', this.UploadEvent);
+      //this.uploadFileInput.addEventListener('change', this.uploadEvent);
     }, 500)
   }
 
@@ -82,8 +86,8 @@ export class AdminPanelComponent extends UnitComponent {
       title: this.titleNewNews,
       text: this.textNewNews,
       allText: this.allTextNewNews,
-      time: this.dateNewNews
-
+      time: this.dateNewNews,
+      img: this.uploadFileSRCNews[0]
     };
     await this.store.collection('news').doc(this.randomGenerateId(8, "news")).set(this.newNews);
     location.reload()
@@ -114,7 +118,8 @@ export class AdminPanelComponent extends UnitComponent {
         mouth: this.toDate.month,
         day: this.toDate.day
       },
-      hot: this.isHotTour
+      hot: this.isHotTour,
+      imgs: this.uploadFileSRC
     };
     await this.store.collection('tours').doc(this.randomGenerateId(8, "tours")).set(this.newTour);
     location.reload()
@@ -168,12 +173,15 @@ export class AdminPanelComponent extends UnitComponent {
     this.uploadFileInput.click();
   }
 
-  UploadEvent(event) {
-    console.log(event.target.files)
-    // if (event.files.length == undefined){
-    //   return;
-    // }
+  uploadEvent(event, isNew = false) {
     const files = Array.from(event.target.files);
+    if (files == undefined){
+      return;
+    }
+    // @ts-ignore
+    this.uploadFileSRCNews = [];
+    // @ts-ignore
+    this.uploadFileSRC = [];
     files.forEach(file => {
       // @ts-ignore
       if (!file.type.match('image')){
@@ -182,12 +190,33 @@ export class AdminPanelComponent extends UnitComponent {
       const reader = new FileReader();
       reader.onload = ev => {
         const src = ev.target.result;
-        // @ts-ignore
-        this.uploadFileSRC.push(src)
-        console.log(src)
+        if (isNew){
+          // @ts-ignore
+          this.uploadFileSRCNews.push({src, name: file.name, size: this.bytesToSize(file.size)})
+        }else {
+          // @ts-ignore
+          this.uploadFileSRC.push({src, name: file.name, size: this.bytesToSize(file.size)})
+        }
       };
       // @ts-ignore
       reader.readAsDataURL(file)
-    })
+    });
+  }
+
+  private bytesToSize(bytes) {
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (!bytes) return '0 Byte';
+    // @ts-ignore
+    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
+  }
+
+  removeEvent(name, isNews = false) {
+    if (isNews) { // @ts-ignore
+      this.uploadFileSRCNews = this.uploadFileSRCNews.filter(file => file.name !== name)
+      return;
+    }
+    // @ts-ignore
+    this.uploadFileSRC = this.uploadFileSRC.filter(file => file.name !== name)
   }
 }

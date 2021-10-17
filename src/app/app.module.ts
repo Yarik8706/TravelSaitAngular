@@ -38,6 +38,13 @@ const appRoutes: Routes = [
   { path: '', component: MainComponent},
   { path: 'contacts', component: ContactsComponent},
   { path: 'news', component: NewsComponent},
+  {
+    path: 'news',
+    children: [{
+      path: '**',
+      component: TourComponent
+    }]
+  },
   { path: 'admin-panel', component: AdminPanelComponent},
   { path: 'about-us', component: AboutUsComponent},
   { path: 'tour', redirectTo: '' },

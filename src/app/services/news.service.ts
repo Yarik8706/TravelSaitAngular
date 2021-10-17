@@ -11,6 +11,10 @@ export class NewsService {
     private store: AngularFirestore
   ) { }
 
+  getNewsById(id){
+    return this.store.collection<News>('news').doc(String(id)).get()
+  }
+
   getAllNews(){
     return this.store.collection<News>('news').get()//.subscribe(data => {
     //   let dataTour: {};

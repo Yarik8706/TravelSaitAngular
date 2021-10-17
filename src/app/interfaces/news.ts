@@ -4,5 +4,6 @@ export interface News {
   text: string,
   allText: string,
   title: string,
-  time: NgbDateStruct
+  time: NgbDateStruct,
+  img: {src, name, size}
 }

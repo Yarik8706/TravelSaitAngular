@@ -39,7 +39,7 @@
   <div class="row">
     <div *ngFor="let tour of allTours; let index; " class="col">
       <div class="card">
-        <img src="..." class="card-img-top" alt="Здесь должна быть фотография">
+        <img src="{{tour.imgs[0].src}}" class="card-img-top" alt="{{tour.imgs[0].name}}">
         <div class="card-body">
           <h4 class="card-title">{{tour.title}}</h4>
           <p class="card-text">{{tour.text}}</p>

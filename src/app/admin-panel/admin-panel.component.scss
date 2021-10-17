@@ -4,29 +4,77 @@
     text-align: center;
   }
 }
-#uploadFileInput{
-  visibility: hidden;
+
+.checkbox{
+  width: 15px;
+  height: 15px;
+  padding: 10px 10px 10px 10px;
+}
+
+.uploadFileInput{
+  display: none;
 }
 
 .preview{
   display: flex;
   flex-wrap: wrap;
   padding: .8rem;
+
 }
+
 .preview-image{
+  &:hover .preview-remove{
+     opacity: 1;
+  }
+  &:hover .preview-info{
+    bottom: 0;
+  }
+  position: relative;
   margin-bottom: .5rem;
   margin-right: .5rem;
+  overflow: hidden;
   img{
     width: 180px;
     height: auto;
   }
+  .preview-remove{
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-weight: bold;
+    background: rgba(255, 255, 255, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity .22s;
+  }
+  .preview-info{
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+    left: 0;
+    height: 25px;
+    font-size: .8rem;
+    background: rgba(255, 255, 255, .5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    transition: bottom .22s;
+  }
 }
+
 .form-group.hidden {
   width: 0;
   margin: 0;
   border: none;
   padding: 0;
 }
+
 .custom-day {
   text-align: center;
   padding: 0.185rem 0.25rem;
@@ -34,16 +82,20 @@
   height: 2rem;
   width: 2rem;
 }
+
 .custom-day.focused {
   background-color: #e6e6e6;
 }
+
 .custom-day.range, .custom-day:hover {
   background-color: rgb(2, 117, 216);
   color: white;
 }
+
 .custom-day.faded {
   background-color: rgba(2, 117, 216, 0.5);
 }
+
 @include big-display{
   .card{
     .card-body {
@@ -56,6 +108,7 @@
     }
   }
 }
+
 @include small-display{
   .card{
     width: 100%!important;
