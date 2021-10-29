@@ -16,6 +16,10 @@ export class CardsNewsComponent extends UnitComponent{
   // @ts-ignore
   allNews: [News] = [];
   loadingNews: boolean;
+  newTitle: string;
+  newText: string;
+  isEditNews: boolean;
+  newDate: string;
 
   constructor(
     private newsService: NewsService,
@@ -47,5 +51,19 @@ export class CardsNewsComponent extends UnitComponent{
     this.CreateFlashMessage("Новоя новость успешно удалена!", "success", 4000);
     this.newsService.delNews(id);
     location.reload()
+  }
+
+  async EditNews(id, data){
+    if (!this.isEditNews){
+      this.isEditNews = true;
+      return;
+    }
+    this.newText = data.text;
+    this.newTitle = data.title;
+    this.newDate = data.date;
+    await this.newsService.editNewsById(id, {
+      title: this.newTitle, text: this.newText
+    })
+    location.reload();
   }
 }

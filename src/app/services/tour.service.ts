@@ -18,6 +18,10 @@ export class TourService {
     return this.store.collection<Tour>('tours').get();
   }
 
+  editTourById(id, data){
+    return this.store.collection('tours').doc(String(id)).update(data)
+  }
+
   getTourById(id){
     return this.store.collection<Tour>('tours').doc(String(id)).get()
   }

@@ -24,7 +24,6 @@ export class CardNewsComponent extends UnitComponent {
   ngOnInit(): void {
     this.loadingNews = true;
     this.newsService.getNewsById(location.pathname.slice(6)).subscribe(data => {
-      let dataTour: {};
       this.News = data.data();
       this.News['id'] = data.id;
       this.loadingNews = false;

@@ -25,7 +25,6 @@ export class CardsDiscountComponent extends UnitComponent{
       let dataDiscount: {};
       data.forEach(Discount => {
         dataDiscount = Discount.data();
-        console.log(dataDiscount)
         //@ts-ignore
         dataDiscount['time'] = Object.values(dataDiscount.time).join("-");
         dataDiscount['id'] = Discount.id;

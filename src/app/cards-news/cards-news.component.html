@@ -9,18 +9,23 @@
       <img src="{{new.img.src}}" alt="{{new.img.name}}">
     </div>
     <div class="col">
-      <h5 class="title">{{new.title}}</h5>
-      <span class="data">{{new.time}}</span>
-      <p class="text">
+      <span *ngIf="isEditNews">
+        <input type="text" class="form-control" placeholder="title" [(ngModel)]="newTitle"><br>
+        <input type="text" class="form-control" placeholder="yyyy.mm.dd" [(ngModel)]="newDate"><br>
+        <textarea class="form-control" placeholder="text" [(ngModel)]="newText"></textarea>
+      </span>
+      <h5 class="title" *ngIf="!isEditNews">{{new.title}}</h5>
+      <span class="date" *ngIf="!isEditNews">{{new.time}}</span>
+      <p *ngIf="!isEditNews" class="text">
         {{new.text}}
       </p>
-      <span *ngIf="isAdmin()">
-        <div class="row">
-          <a class="btn btn-outline-success" href="news/{{new.id}}">Подробнее</a>
+      <div class="row">
+        <a class="btn btn-outline-success" href="news/{{new.id}}">Подробнее</a>
+        <span *ngIf="isAdmin()">
           <button class="btn btn-outline-danger" (click)="delNews(new.id)">Удалить</button>
-          <button class="btn btn-outline-warning">Изменить(неработает)</button>
-        </div>
-      </span>
+          <button class="btn btn-outline-warning" (click)="EditNews(new.id, {text: new.text, title: new.title, date: new.time})">Изменить</button>
+        </span>
+      </div>
     </div>
   </div>
 </div>

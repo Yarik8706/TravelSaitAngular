@@ -1,0 +1,13 @@
+.search{
+  display: flex;
+  background-image: url(https://1travel.uz/wp-content/uploads/2018/07/tailand.jpg);
+  -webkit-background-size: cover;
+  background-size: cover;
+  height: 423px;
+  justify-content: center;
+  .content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

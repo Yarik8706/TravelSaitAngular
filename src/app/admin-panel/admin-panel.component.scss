@@ -1,20 +1,27 @@
 @import "../../styles";
-.tours{
+.cards{
   .title{
     text-align: center;
   }
 }
-
+#sidebar{
+  ul{
+    ul{
+      background-color: $info;
+    }
+    a{
+      color: white;
+    }
+  }
+}
 .checkbox{
   width: 15px;
   height: 15px;
   padding: 10px 10px 10px 10px;
 }
-
 .uploadFileInput{
   display: none;
 }
-
 .preview{
   display: flex;
   flex-wrap: wrap;

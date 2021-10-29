@@ -1,10 +1,17 @@
-import {Component, Injector} from '@angular/core';
+import {Component, ElementRef, Injector, ViewChild} from '@angular/core';
 import {UnitComponent} from "../unit.component";
 import {Tour} from "../interfaces/tour";
 import {User} from "../interfaces/user";
 import {News} from "../interfaces/news";
 import {NewsService} from "../services/news.service";
-import {NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
+import {
+  NgbActiveModal,
+  NgbCalendar,
+  NgbDate,
+  NgbDateParserFormatter,
+  NgbDateStruct,
+  NgbModal
+} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-admin-panel',
@@ -12,6 +19,16 @@ import {NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDateStruct} from "@ng-b
   styleUrls: ['./admin-panel.component.scss']
 })
 export class AdminPanelComponent extends UnitComponent {
+
+  //--------------Setting------------------
+  isShowingMain: boolean;
+  isShowingTour: boolean;
+  isShowingNews: boolean;
+  isShowingDiscount: boolean;
+  isCreating: boolean;
+  problemsMessage;
+  @ViewChild("content", {static: false})
+  modalWindow: ElementRef|undefined;
 
   //--------------Tour-----------------
   titleNewTour: string;
@@ -47,6 +64,8 @@ export class AdminPanelComponent extends UnitComponent {
   isAuth: boolean;
 
   constructor(
+    private modalService: NgbModal,
+    //public activeModal: NgbActiveModal,
     private newsService: NewsService,
     injector: Injector,
     private calendar: NgbCalendar,
@@ -57,12 +76,19 @@ export class AdminPanelComponent extends UnitComponent {
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   }
 
+  placeNull(){
+    this.isShowingMain = false;
+    this.isShowingTour = false;
+    this.isShowingNews = false;
+    this.isShowingDiscount = false;
+  }
+
   ngOnInit() {
+    this.isShowingMain = true;
     this.isHotTour = false;
     this.isAuth = localStorage.getItem('access') == 'true';
     setTimeout(()=>{
       this.uploadFileInput = document.getElementById("uploadFileInput");
-      //this.uploadFileInput.addEventListener('change', this.uploadEvent);
     }, 500)
   }
 
@@ -82,6 +108,30 @@ export class AdminPanelComponent extends UnitComponent {
   }
 
   async addNewNews() {
+    if(this.isCreating){
+      return;
+    }
+    if (!this.titleNewNews || this.titleNewNews.length < 7){
+      this.problemsMessage = "Название слишком короткое или его вообще нет!";
+      this.modalService.open(this.modalWindow);
+      return;
+    } else if (!this.textNewNews || this.textNewNews.length < 44){
+      this.problemsMessage = "Краткое описание слишком короткое или его вообще нет!";
+      this.modalService.open(this.modalWindow);
+      return;
+    } else if (!this.allTextNewNews){
+      this.problemsMessage = "Текст слишком маленький или его вообще нет!";
+      this.modalService.open(this.modalWindow);
+      return;
+    } else if (!this.uploadFileSRCNews[0]){
+      this.problemsMessage = "Нет фотографии!";
+      this.modalService.open(this.modalWindow);
+      return;
+    } else if (!this.dateNewNews){
+      this.problemsMessage = "Нет даты новости!";
+      this.modalService.open(this.modalWindow);
+      return;
+    }
     this.newNews = {
       title: this.titleNewNews,
       text: this.textNewNews,
@@ -89,11 +139,33 @@ export class AdminPanelComponent extends UnitComponent {
       time: this.dateNewNews,
       img: this.uploadFileSRCNews[0]
     };
+    this.isCreating = true;
     await this.store.collection('news').doc(this.randomGenerateId(8, "news")).set(this.newNews);
     location.reload()
   }
 
   async addNewDiscount() {
+    if(this.isCreating){
+      return;
+    }
+    if (!this.titleNewDiscount || this.titleNewDiscount.length < 7){
+      this.problemsMessage = "Название слишком короткое или его вообще нет!";
+      this.modalService.open(this.modalWindow);
+      return;
+    } else if (!this.textNewDiscount || this.textNewDiscount.length < 44){
+      this.problemsMessage = "Краткое описание слишком короткое или его вообще нет!";
+      this.modalService.open(this.modalWindow);
+      return;
+    } else if (!this.allTextNewDiscount){
+      this.problemsMessage = "Текст слишком маленький или его вообще нет!";
+      this.modalService.open(this.modalWindow);
+      return;
+    } else if (!this.dateNewDiscount){
+      this.problemsMessage = "Нет даты!";
+      this.modalService.open(this.modalWindow);
+      return;
+    }
+    this.isCreating = true;
     await this.store.collection('discounts').doc(this.randomGenerateId(8, "discounts")).set({
       title: this.titleNewDiscount,
       text: this.textNewDiscount,
@@ -104,6 +176,26 @@ export class AdminPanelComponent extends UnitComponent {
   }
 
   async addNewTour(){
+    if(this.isCreating){
+      return;
+    }
+    if (!this.titleNewTour || this.titleNewTour.length < 7){
+      this.problemsMessage = "Название слишком короткое или его вообще нет!";
+      this.modalService.open(this.modalWindow);
+      return;
+    } else if (!this.textNewTour || this.textNewTour.length < 44){
+      this.problemsMessage = "Краткое описание слишком короткое или его вообще нет!";
+      this.modalService.open(this.modalWindow);
+      return;
+    } else if (!this.allTextNewTour){
+      this.problemsMessage = "Текст слишком маленький или его вообще нет!";
+      this.modalService.open(this.modalWindow);
+      return;
+    } else if (!this.uploadFileSRC[0]){
+      this.problemsMessage = "Нет фотографии для тура!";
+      this.modalService.open(this.modalWindow);
+      return;
+    }
     this.newTour = {
       title: this.titleNewTour,
       text: this.textNewTour,
@@ -119,8 +211,9 @@ export class AdminPanelComponent extends UnitComponent {
         day: this.toDate.day
       },
       hot: this.isHotTour,
-      imgs: this.uploadFileSRC
+      img: this.uploadFileSRC[0]
     };
+    this.isCreating = true;
     await this.store.collection('tours').doc(this.randomGenerateId(8, "tours")).set(this.newTour);
     location.reload()
   }
@@ -161,16 +254,11 @@ export class AdminPanelComponent extends UnitComponent {
     return this.toDate && date.after(this.fromDate) && date.before(this.toDate);
   }
   isRange(date: NgbDate) {
-    console.log(this.toDate);
     return date.equals(this.fromDate) || (this.toDate && date.equals(this.toDate)) || this.isInside(date) || this.isHovered(date);
   }
   validateInput(currentValue: NgbDate | null, input: string): NgbDate | null {
     const parsed = this.formatter.parse(input);
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
-  }
-
-  triggerInput() {
-    this.uploadFileInput.click();
   }
 
   uploadEvent(event, isNew = false) {

@@ -1,5 +1,16 @@
 <br>
 <section class="tour container">
-  <h1 class="title">{{title}}</h1>
-  <p class="text">{{text}}</p>
+  <div class="d-flex justify-content-center" *ngIf="!loading">
+    <div class="spinner-border text-warning" role="status">
+      <span class="visually-hidden"></span>
+    </div>
+  </div>
+  <h1 class="title" *ngIf="!isEdit">{{title}}</h1>
+  <input class="form-control" [(ngModel)]="title" *ngIf="isEdit">
+  <quill-view-html *ngIf="!isEdit && text" [content]="text" theme="snow"></quill-view-html>
+  <quill-editor [(ngModel)]="text" *ngIf="isEdit"></quill-editor>
+  <span>
+    <button class="btn btn-warning" (click)="edit()">Изменить</button>
+    <button class="btn btn-danger" *ngIf="!isEdit" (click)="tourService.delTour(id)">Удалить</button>
+  </span>
 </section>

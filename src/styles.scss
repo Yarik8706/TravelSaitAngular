@@ -2,9 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
 
 @mixin small-display{
-  @media (max-width: 420px){
+  @media (max-width: 490px){
     @content;
   }
 }
@@ -18,8 +22,6 @@
     @content;
   }
 }
-
-html, body { height: 100%; }
 body {
   font-family: 'Roboto', sans-serif;
 }

@@ -1,3 +1,33 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Ошибка!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{problemsMessage}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close')">Close</button>
+  </div>
+</ng-template>
+<nav class="nav shadow-sm justify-content-center bg-info" id="sidebar" *ngIf="isAuth">
+  <ul class="nav nav-tabs">
+    <li class="d-inline-block">
+      <a class="nav-link" (click)="placeNull(); isShowingMain = true">Главная</a>
+    </li>
+    <li class="d-inline-block">
+      <a class="nav-link" (click)="placeNull(); isShowingTour = true">Туры</a>
+    </li>
+    <li class="d-inline-block">
+      <a class="nav-link" (click)="placeNull(); isShowingNews=true">Новости</a>
+    </li>
+    <li class="d-inline-block">
+      <a class="nav-link" (click)="placeNull(); isShowingDiscount=true">Скидки</a>
+    </li>
+  </ul>
+</nav>
 <br>
 <div class="container justify-content-center" *ngIf="!isAuth">
   <h2 class="title">Вход: </h2>
@@ -14,7 +44,10 @@
   </div>
 </div>
 <section class="admin-panel container" *ngIf="isAuth">
-  <div>
+  <div class="cards" *ngIf="isShowingMain">
+    <h1 class="title">Главное меню</h1>
+  </div>
+  <div *ngIf="isShowingTour" class="creating-tour">
     <h1 class="title">Создание тура</h1>
     <div class="mb-3">
       <label for="title-card" class="form-label">Название</label>
@@ -26,15 +59,14 @@
     </div>
     <div class="mb-3">
       <label for="allText-card" class="form-label">Полное описание</label>
-      <textarea class="form-control" [(ngModel)]="allTextNewTour" id="allText-card" rows="4"></textarea>
+      <quill-editor [(ngModel)]="allTextNewTour" id="allText-card"></quill-editor>
     </div>
     <div class="mb-3">
-      <input class="checkbox" type="checkbox" value="" (click)="isHotTour = !isHotTour" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">Это горячий тур?</label>
+      <mat-checkbox class="example-margin" [(ngModel)]="isHotTour" id="flexCheckDefault">Это горячий тур?</mat-checkbox>
     </div>
     <div class="mb-3">
       <button class="btn btn-warning" (click)="inputTours.click()">Загрузить фотографию</button>
-      <input [type]="'file'" #inputTours (change)="uploadEvent($event)" [multiple]="true" class="uploadFileInput" [accept]="'.png,.jpeg,.jpg'">
+      <input [type]="'file'" #inputTours (change)="uploadEvent($event)" class="uploadFileInput" [accept]="'.png,.jpeg,.jpg'">
       <div class="preview" id="preview" >
         <div class="preview-image" *ngFor="let img of uploadFileSRC">
           <div class="preview-remove" (click)="removeEvent(img.name)">&times;</div>
@@ -84,7 +116,7 @@
     <button class="btn btn-success" (click)="addNewTour()">Создать</button>
   </div>
   <br>
-  <div>
+  <div *ngIf="isShowingNews" class="creating-news">
     <h1 class="title">Создание новости</h1>
     <div class="mb-3">
       <label for="titleNews-card" class="form-label">Название</label>
@@ -96,7 +128,7 @@
     </div>
     <div class="mb-3">
       <label for="allTextNews-card" class="form-label">Полное описание</label>
-      <textarea class="form-control" [(ngModel)]="allTextNewNews" id="allTextNews-card" rows="4"></textarea>
+      <quill-editor [(ngModel)]="allTextNewNews" id="allTextNews-card"></quill-editor>
     </div>
     <div class="mb-3">
       <button class="btn btn-warning" (click)="inputNews.click()">Загрузить фотографию</button>
@@ -129,7 +161,7 @@
     <button class="btn btn-success" (click)="addNewNews()">Создать</button>
   </div>
   <br>
-  <div>
+  <div *ngIf="isShowingDiscount" class="creating-discount">
     <h1 class="title">Создание скидки</h1>
     <div class="mb-3">
       <label for="titleDiscount-card" class="form-label">Название</label>
@@ -141,7 +173,7 @@
     </div>
     <div class="mb-3">
       <label for="allTextDiscount-card" class="form-label">Полное описание</label>
-      <textarea class="form-control" [(ngModel)]="allTextNewDiscount" id="allTextDiscount-card" rows="4"></textarea>
+      <quill-editor [(ngModel)]="allTextNewDiscount" id="allTextDiscount-card"></quill-editor>
     </div>
     <div class="mb-3">
       <label for="calendarDiscount" class="form-label">Дата</label>
@@ -160,14 +192,19 @@
     <button class="btn btn-success" (click)="addNewDiscount()">Создать</button>
   </div>
   <br>
-  <div class="tours">
+  <div *ngIf="isShowingTour" class="cards">
     <h1 class="title">Все туры</h1>
     <app-cards-tour></app-cards-tour>
   </div>
   <br>
-  <div class="tours">
+  <div *ngIf="isShowingNews" class="cards">
     <h1 class="title">Все новости</h1>
     <app-cards-news></app-cards-news>
+  </div>
+  <br>
+  <div *ngIf="isShowingDiscount" class="cards">
+    <h1 class="title">Все скидки</h1>
+    <app-cards-discount></app-cards-discount>
   </div>
 </section>
 <br>

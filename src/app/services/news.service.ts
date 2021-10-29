@@ -15,16 +15,12 @@ export class NewsService {
     return this.store.collection<News>('news').doc(String(id)).get()
   }
 
+  editNewsById(id, data){
+    this.store.collection('news').doc(String(id)).update(data)
+  }
+
   getAllNews(){
-    return this.store.collection<News>('news').get()//.subscribe(data => {
-    //   let dataTour: {};
-    //   data.forEach(news => {
-    //     dataTour = news.data();
-    //     dataTour['id'] = news.id;
-    //     // @ts-ignore
-    //     allNews.push(dataTour);
-    //   });
-    // });
+    return this.store.collection<News>('news').get()
   }
 
   delNews(id){

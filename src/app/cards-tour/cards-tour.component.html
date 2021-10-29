@@ -1,34 +1,19 @@
 <h1 style="text-align: center">Горячие туры</h1>
 <br>
-<ngb-carousel *ngIf="images" style="width: 100%!important;">
-  <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
-      <img [src]="images[0]" style="width: 100%!important;" alt="Random first slide">
-    </div>
-    <div class="carousel-caption">
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </div>
-  </ng-template>
-  <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
-      <img [src]="images[1]" style="width: 100%!important;" alt="Random second slide">
-    </div>
-    <div class="carousel-caption">
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </div>
-  </ng-template>
-  <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
-      <img [src]="images[2]" style="width: 100%!important;" alt="Random third slide">
-    </div>
-    <div class="carousel-caption">
-      <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-    </div>
-  </ng-template>
-</ngb-carousel>
+<div class="hotTours" style="height: 550px">
+  <ngb-carousel *ngIf="hotTours" style="width: 100%!important;">
+    <ng-template ngbSlide *ngFor="let tour of hotTours">
+      <div class="picsum-img-wrapper">
+        <img [src]="tour.img.src" style="width: 100%!important;height: 550px" alt="{{tour.img.name}}">
+      </div>
+      <div class="carousel-caption">
+        <h3>{{tour.title}}</h3>
+        <p>to: {{tour.toDate}}, do: {{tour.fromDate}}</p>
+        <p>{{tour.text}}</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</div>
 <div class="all-tours" style="padding-top: 20px">
   <h1 style="text-align: center">Туры</h1>
   <div class="d-flex justify-content-center" *ngIf="loadingTours">
@@ -39,13 +24,52 @@
   <div class="row">
     <div *ngFor="let tour of allTours; let index; " class="col">
       <div class="card">
-        <img src="{{tour.imgs[0].src}}" class="card-img-top" alt="{{tour.imgs[0].name}}">
+        <img src="{{tour.img.src}}" class="card-img-top" alt="{{tour.img.name}}">
         <div class="card-body">
-          <h4 class="card-title">{{tour.title}}</h4>
-          <p class="card-text">{{tour.text}}</p>
-          <span>From: {{tour.fromDate}}, To: {{tour.toDate}}</span><br>
-          <button routerLink="/tour/{{tour.id}}" class="btn btn-primary">Подробности</button>
+          <span *ngIf="isEditTour">
+            <input type="text" class="form-control" placeholder="title" [(ngModel)]="newTitle"><br>
+            <label for="dateTour" class="form-label">Тур действует от и до:</label>
+      <form class="form-inline" id="dateTour">
+        <div class="form-group hidden">
+        <div class="input-group">
+          <input name="datepicker" class="form-control" ngbDatepicker #datepicker="ngbDatepicker" [autoClose]="'outside'"
+                 (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden" [startDate]="fromDate!" tabindex="-1">
+          <ng-template #t let-date let-focused="focused">
+        <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)" [class.faded]="isHovered(date) || isInside(date)"
+              (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+          {{ date.day }}
+        </span>
+          </ng-template>
+        </div>
+      </div>
+        <div class="form-group">
+        <div class="input-group">
+          <input #dpFromDate class="form-control" placeholder="yyyy-mm-dd" name="dpFromDate" [value]="formatter.format(fromDate)"
+                 (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+        <div class="form-group ml-2">
+        <div class="input-group">
+          <input #dpToDate class="form-control" placeholder="yyyy-mm-dd" name="dpToDate" [value]="formatter.format(toDate)"
+                 (input)="toDate = validateInput(toDate, dpToDate.value)">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+      </form>
+            <textarea class="form-control" placeholder="text" [(ngModel)]="newText"></textarea>
+          </span>
+          <h4 class="card-title" *ngIf="!isEditTour">{{tour.title}}</h4>
+          <p class="card-text" *ngIf="!isEditTour">{{tour.text}}</p>
+          <span *ngIf="!isEditTour">От: {{tour.fromDate}}, До: {{tour.toDate}}</span><br>
+          <button routerLink="/tour/{{tour.id}}" class="btn btn-primary" *ngIf="!isEditTour">Подробности</button>
           <button class="btn btn-danger" (click)="delTour(tour.id)" *ngIf="isAdmin()">Удалить</button>
+          <button class="btn btn-warning" (click)="editTour(tour.id, {text: tour.text, title: tour.title})">Изменить</button>
+          <button class="btn btn-danger" (click)="isEditTour = false" *ngIf="isEditTour">Отмена</button>
         </div>
       </div>
     </div>

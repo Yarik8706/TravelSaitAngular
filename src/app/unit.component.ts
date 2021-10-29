@@ -2,6 +2,7 @@ import {Component, Injector, OnInit} from '@angular/core';
 import {FlashMessagesService } from "angular2-flash-messages";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {TourService} from "./services/tour.service";
+import {Router} from "@angular/router";
 
 @Component({
   template: '',
@@ -12,8 +13,10 @@ export class UnitComponent implements OnInit {
   public flashMessages: FlashMessagesService;
   public store: AngularFirestore;
   public tourService: TourService;
+  public router: Router;
 
   constructor(injector:Injector ) {
+    this.router = injector.get(Router);
     this.store = injector.get(AngularFirestore);
     this.flashMessages = injector.get(FlashMessagesService);
     this.tourService = injector.get(TourService);

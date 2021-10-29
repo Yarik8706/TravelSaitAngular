@@ -45,7 +45,7 @@
         Туры
       </a>
       <ul ngbDropdownMenu aria-labelledby="Tours">
-        <li *ngFor="let tour of tours"><a ngbDropdownItem routerLink="tour/{{tour.id}}">{{tour.title}}</a></li>
+        <li *ngFor="let tour of tours"><a ngbDropdownItem href="tour/{{tour.id}}">{{tour.title}}</a></li>
       </ul>
     </li>
     <li class="d-inline-block">

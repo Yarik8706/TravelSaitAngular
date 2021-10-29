@@ -8,10 +8,11 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from "@angular/router";
-import { FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BootstrapIconsModule } from 'ng-bootstrap-icons';
 import { allIcons } from 'ng-bootstrap-icons/icons';
+import { QuillModule } from 'ngx-quill'
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -33,6 +34,10 @@ import { CardsNewsComponent } from './cards-news/cards-news.component';
 import { CardNewsComponent } from './card-news/card-news.component';
 import { CardsTourComponent } from './cards-tour/cards-tour.component';
 import { CardsDiscountComponent } from './cards-discount/cards-discount.component';
+import { SearchComponent } from './search/search.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatInputModule} from "@angular/material/input";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 const appRoutes: Routes = [
   { path: '', component: MainComponent},
@@ -42,7 +47,7 @@ const appRoutes: Routes = [
     path: 'news',
     children: [{
       path: '**',
-      component: TourComponent
+      component: CardNewsComponent
     }]
   },
   { path: 'admin-panel', component: AdminPanelComponent},
@@ -77,7 +82,8 @@ const appRoutes: Routes = [
     CardsNewsComponent,
     CardNewsComponent,
     CardsTourComponent,
-    CardsDiscountComponent
+    CardsDiscountComponent,
+    SearchComponent
   ],
   imports: [
     BootstrapIconsModule.pick(allIcons),
@@ -89,7 +95,12 @@ const appRoutes: Routes = [
     NgbModule,
     BrowserAnimationsModule,
     FormsModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    QuillModule.forRoot(),
+    MatCheckboxModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [
     TourService,
