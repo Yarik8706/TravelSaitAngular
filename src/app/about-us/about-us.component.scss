@@ -1,18 +1,22 @@
 @import "../../styles";
+
 .about-us{
   .text {
+    .box_text{
+      border-radius: 25px;
+      border: dashed orange;
+      padding: 25px;
+      margin: 25px;
+    }
     .title{
+      text-align: center;
+      font-style: italic;
       font-size: 32px;
       padding-left: 40px;
       font-weight: 700;
     }
-    h3{
-      font-size: 28px;
-      padding-left: 40px;
-      font-weight: 600;
-    }
-    p{
-      line-height: 45px;
+    .before_title_text {
+      line-height: 30px;
     }
   }
 }
